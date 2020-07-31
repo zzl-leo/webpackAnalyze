@@ -1,0 +1,21 @@
+{
+  "name": "webpackProject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server --inline --content-base .",
+    "dev": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "css-loader": "^4.1.1",
+    "html-webpack-plugin": "^4.3.0",
+    "less": "^3.12.2",
+    "less-loader": "^6.2.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
