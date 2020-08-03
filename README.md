@@ -491,17 +491,18 @@ console.log($)
 2. css中引入
 3. `<img src="">`
 
-`yarn add file-loader -D`
-
-适合一二情况
-
+`yarn add url-loader file-loader -D`
+// url-loader 内部会自动调用file-loader
+// file-loader默认会在内部生成一张图片 到build目录下
+// 并且把生成的图片的名字返回
+// module rules下配置
 ```
 module.export={
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif)$/,
-        use: 'file-loader'
+        test: /\.(gif|jpg|jpeg|png|svg)$/,
+        loader: 'url-loader'
       }
     ]
   }
