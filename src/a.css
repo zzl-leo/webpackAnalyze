@@ -1,6 +1,7 @@
 body {
     color: pink;
     transform: rotate(45deg);
+    /* background: url("./asset/img/bg.jpg"); */
 }
 
 ::placeholder {

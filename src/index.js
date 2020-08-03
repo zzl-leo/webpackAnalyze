@@ -3,6 +3,7 @@
 // console.log(str);
 
 // require('./index.css');
+require('./a.css');
 
 // require('./index.less');
 
@@ -34,5 +35,12 @@
 // import $ from 'jquery' // 内联loader
 // import $ from 'expose-loader?$!jquery'
 // require("expose-loader?$!jquery");
-console.log($)
-console.log(window.$)
+// console.log($)
+// console.log(window.$)
+
+
+// a、在js中创建图片引入；b、在css中引入 background(url)；c、<img src=""  alt=""/>
+import logo from './asset/img/bg.jpg'
+let image = new Image();
+image.src = logo
+document.body.appendChild(image)

@@ -19,6 +19,7 @@ module.exports = {
     output: { // 出口
         filename: 'bundle.[hash:8].js', // 打包后的文件名  [hash] 每次打包时候生成一个新的文件，防止出现缓存问题 :8 hash值为8位
         path: path.resolve(__dirname, 'dist'), // 路径 必须是一个绝对路径 需要node path, reslove可以将一个相对路径解析成绝对路径
+        // publicPath: 'http://www.....'   // 如果要做cdn资源访问 可以通过publicPath 在所有资源前面加上publicPath
     },
     optimization: { // 优化项目
         minimizer: [
@@ -41,7 +42,7 @@ module.exports = {
             hash: true, // 增加hash戳  缓存问题处理
         }),
         new MiniCssExtractPlugin({
-            filename: 'main.css', // 抽离出的css文件名
+            filename: 'css/main.css', // 抽离出的css文件名
             // 指定css还是less等其它样式语言被抽离 --- loader
         }),
         new webpack.ProvidePlugin({ // 在每个模块中都注入 $ 
@@ -139,7 +140,26 @@ module.exports = {
             //             enforce: 'pre' // 保证该loader在前面执行
             //         }
             //     },
-            // }
+            // },
+            // html中引用的静态资源在这里处理,默认配置参数attrs=img:src,处理图片的src引用的资源.
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
+            },
+            // 图片资源处理
+            {
+                test: /\.(gif|jpg|jpeg|png|svg)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        // 限制 图片小于5k时，用base64来转化   减少图片http请求
+                        // 否则用file-loader产生真实的图片   
+                        limit: 5*1024,
+                        outputPath: 'img/', // 设置打包后 图片输出路径
+                        // publicPath: 'http........', // 也可以只对图片资源做cdn公共路径前缀设置
+                    }
+                }
+            }
         ]
     },
     externals: {
