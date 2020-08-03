@@ -1,3 +1,8 @@
 body {
     color: pink;
+    transform: rotate(45deg);
+}
+
+::placeholder {
+    color: gray;
 }
